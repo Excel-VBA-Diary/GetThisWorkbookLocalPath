@@ -1,5 +1,5 @@
 # ThisWorkbookLocalPath
-## OneDriveに同期したSharePointファイルのローカルドライブ上のパスを返す    
+## OneDriveに同期したSharePointファイルのローカルドライブ上のパスを取得する    
 **(Returns the path on the local drive of SharePoint files synced to OneDrive)** 
   
   
