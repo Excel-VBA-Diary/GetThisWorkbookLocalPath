@@ -13,22 +13,28 @@ SharePointファイルを同期するには「同期クライアント」と「O
   
 ここで紹介する方法は「最近使った項目の表示」を利用するもので、最近使ったファイルやフォルダーが
   
-C:\Users\\<user-name>\AppData\Roaming\Microsoft\Windows\Recent  
+C:\Users\\\<user-name\>\AppData\Roaming\Microsoft\Windows\Recent  
   
 のフォルダーにリンクファイル（LNKファイル）として自動的に記録される機能を利用してます。このリンクファイルのリンク先を取得することでローカルドライブ上のパスを得ることができます。    
   
-ローカルパスを取得する関数のは ThisWorkbookLocalPath() で、OneDriveに同期したSharePointファイルのローカルドライブ上のパスを返します。つまり、ThisWorkbookLocalPath()はThisWorkbook.Pathに置き換えて使うことができます。 このマクロを任意のOneDrive上のフォルダーに置き、そのまま起動することができます。
+ローカルパスを取得する関数は ThisWorkbookLocalPath() で、OneDriveに同期したSharePointファイルのローカルドライブ上のパスを返します。つまり、ThisWorkbookLocalPath()はThisWorkbook.Pathに置き換えて使うことができます。 このマクロを任意のOneDrive上のフォルダーに置き、そのまま起動することができます。
 この関数をテストするコードは Test_ThisWorkbookLocalPath() です。  
   
 ### Start_TrackDocs() ###
   
+この関数はレジストリキー  
+"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\  
+にある Start_TrackDocs の値を読んで、その値を返します。  
 「最近使った項目の表示」を利用するには、「Windowsの設定」⇒「個人用設定」⇒「スタート」の「～最近使った項目の表示」が有効である必要があります。  
-この「～最近使った項目の表示」が有効か無効かはレジストリを読んで判断できます。その関数が Start_TrackDocs() です。  
+「～最近使った項目の表示」が有効か無効かは Start_TrackDocs の値を読んで判別できます。  
   
 ### HideFileExt() ###
   
+この関数はレジストリキー  
+"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\  
+にある HideFileExt の値を読んで、その値を返します。  
 フォルダーオプションの「登録されている拡張子は表示しない」が有効か無効かによってリンクファイルの名前が変わります。
 有効である場合、マクロ付きExcelファイルならリンクファイルは「～.xlsm.LNK」となりますが、無効である場合は「～.LNK」となります。  
-この判別もレジストリを読んで判断しています。その関数が HideFileExt() です。    
+「登録されている拡張子は表示しない」が有効か無効かは HideFileExt の値を読んで判別できます。    
   
 ■    
