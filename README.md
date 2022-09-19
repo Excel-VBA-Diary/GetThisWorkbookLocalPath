@@ -28,6 +28,8 @@ C:\Users\\\<user-name\>\AppData\Roaming\Microsoft\Windows\Recent
 「最近使った項目の表示」を利用するには、「Windowsの設定」⇒「個人用設定」⇒「スタート」の「～最近使った項目の表示」が有効である必要があります。  
 「～最近使った項目の表示」が有効か無効かは Start_TrackDocs の値を読んで判別できます。  
   
+なお、Windowsの環境によってはStart_TrackDocsキーが設定されていない場合があります。その場合は「～最近使った項目の表示」を一旦無効にしてから有効にしてください。  
+  
 ### HideFileExt() ###
   
 この関数はレジストリキー  
