@@ -20,6 +20,10 @@ SharePointファイルを同期するには「同期クライアント」と「O
 ローカルパスを取得する関数は ThisWorkbookLocalPath() で、OneDriveに同期したSharePointファイルのローカルドライブ上のパスを返します。つまり、ThisWorkbookLocalPath()はThisWorkbook.Pathに置き換えて使うことができます。 このマクロを任意のOneDrive上のフォルダーに置き、そのまま起動することができます。
 この関数をテストするコードは Test_ThisWorkbookLocalPath() です。  
   
+### レジストリーキーの読み出し ###  
+  
+ThisWorkbookLocalPathは2つのレジストリキーを読んで処理を実行しています。そのための関数がStart_TrackDocs()とHideFileExt()です。  
+  
 ### Start_TrackDocs() ###
   
 この関数はレジストリキー  
