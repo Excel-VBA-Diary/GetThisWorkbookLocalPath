@@ -13,7 +13,7 @@ SharePointファイルを同期するには「同期クライアント」と「O
   
 ここで紹介する方法は「最近開いた項目の表示」を利用するもので、最近開いたファイルやフォルダーが
   
-    C:\Users\\\<user-name\>\AppData\Roaming\Microsoft\Windows\Recent  
+    C:\Users\<user-name>\AppData\Roaming\Microsoft\Windows\Recent  
   
 のフォルダーにリンクファイル（LNKファイル）として自動的に記録される機能を利用してます。このリンクファイルのリンク先を取得することでローカルドライブ上のパスを得ることができます。    
   
