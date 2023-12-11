@@ -92,7 +92,9 @@ SendKeysはVBAのApplication.SendKeysメソッドは使えません。自分自�
 
 OneDrive、OneDrive for Business、またはTeamsやSharePointを「OneDriveへのショートカットの追加」によってローカルドライブとして利用できます。これはWebアクセスを意識せずに利用できるメリットがあります。  
 一方でこれらの新しい仕組みに対してVBAは非力です。今回の提案はそれを補う一つの方法ですが、そもそもVBAは2012年を最後に大きなアップデートはなくMicrosoftが提案する新しいソリューションに対して置き去りにされた感は否めません。  
-ThisWorkbook.PathがURLを返す問題は解決されたとしても、SharePointを「OneDriveへのショートカットの追加」でファイルを利用するケースでは組織の関係者が共有しているという関係から、CheckOut／CheckInといった排他制御が必要になる場合があります。
+  
+ThisWorkbook.PathがURLを返す問題は解決されたとしても、SharePointを「OneDriveへのショートカットの追加」でファイルを利用するケースでは組織の関係者が共有しているという関係から、CheckOut／CheckInといった排他制御が必要になる場合があります。  
+  
 もちろんVBAにはCheckOut／CheckInのメッソドがありますが、リトライ処理を含むフロー制御が必要になり単純ではありません。
 その意味から今回の提案は、他に解決方法がない場合の暫定的な手段と捉えるべきでしょう。
 
