@@ -60,6 +60,8 @@ GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表�
 
 このようにGetThisWorkbookLocalPath2() はエクスプローラーから情報を得ていますので、該当するエクスプローラーを閉じてしまうと情報が得られなくなります。この場合、GetThisWorkbookLocalPath2() は空文字（長さゼロの文字列）を返します。
 
+なお、OneDrive、OneDrive for Businessの直下（ルートフォルダー）に置かれている場合、ThisWorkbook.Pathはそれぞれ特定のURLパターンを返すので、エクスプローラーから情報を得ずとも、OneDriveにはEnviron("OneDrive")、OneDrive for BusinessにはEnviron("OneDriveCommercial")のローカルパスを対応させています。
+
 ### 提案する解決策 （その３） ###  
   
 ソースコードはGetThisWorkbookLocalPath3.Basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath3() です。
