@@ -20,13 +20,13 @@ TeamsやSharePointファイルを同期するには「同期クライアント�
 ソースコードは標準モジュールをエクスポートしたファイルをそのまま掲載していますので、インポートするか、必要な部分をコピペしてお使いください。  
   
 異なる三つの方法を以下の３つのファイルで掲載しています。  
-GetThisWorkbookLocalPath1.Bas　「最近開いた項目の表示」を利用する方法  
-GetThisWorkbookLocalPath2.Bas　開いているエクスプローラーを利用する方法  
-GetThisWorkbookLocalPath3.Bas　SendKeysを利用する方法  
+Module1.bas　「最近開いた項目の表示」を利用する方法  
+Module2.bas　開いているエクスプローラーを利用する方法  
+Module3.bas　SendKeysを利用する方法  
 
 ### 提案する解決策 （その１） ###  
   
-ソースコードはGetThisWorkbookLocalPath1.Basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath1() です。
+ソースコードはModule1.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath1() です。
 
 このコードは「最近開いた項目の表示」を利用するもので、最近開いたファイルやフォルダーが
   
@@ -54,7 +54,7 @@ GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表�
 
 ### 提案する解決策 （その２） ###  
   
-ソースコードはGetThisWorkbookLocalPath2.Basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath2() です。
+ソースコードはModule2.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath2() です。
 
 このコードは現在開いているExcelファイル（つまりThisWorkbook）が置かれているフォルダーを表示しているエクスプローラーからローカルパスを取得します。
 
@@ -68,7 +68,7 @@ GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表�
 
 ### 提案する解決策 （その３） ###  
   
-ソースコードはGetThisWorkbookLocalPath3.Basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath3() です。
+ソースコードはModule3.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath3() です。
 
 このコードは現在開いているExcelファイル（つまりThisWorkbook）自身にSendKeysによってキーストロークを送ってローカルパスを取得します。
 
