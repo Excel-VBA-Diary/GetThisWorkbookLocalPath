@@ -14,6 +14,12 @@ SharePointファイルを同期するには「同期クライアント」と「O
 一つ目は「最近開いた項目の表示」を利用するもの、二つ目は開いているエクスプローラーを利用するもの、三つ目はSendKeysを利用するものです。
 それぞれ前提条件がありますので、単独もしくは必要に応じて組み合わせて利用するとよいでしょう。
 
+ソースコードは標準モジュールをエクスポートしたファイルを掲載していますので、そのままインポートするか必要な部分をコピペしてお使いください。
+異なる三つの方法を以下の３つのファイルで掲載しています。
+GetThisWorkbookLocalPath1.Bas　「最近開いた項目の表示」を利用する方法
+GetThisWorkbookLocalPath2.Bas　開いているエクスプローラーを利用する方法
+GetThisWorkbookLocalPath3.Bas　SendKeysを利用する方法
+
 ### 提案する解決策 （その１） ###  
   
 ソースコードはGetThisWorkbookLocalPath1.Basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath1() です。
@@ -52,7 +58,7 @@ GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表�
 
 この絶対パス（URI）はエンコードされているのでデコードします。DecodeURL() 関数はそのためのものです。エンコードされるのは特定のASCII文字だけなので、簡易版のDecodeURL_ASCII() 関数も参考に記述しました。
 
-このようにGetThisWorkbookLocalPath2() はエクスプローラーから情報を得ていますので、該当するエクスプローラーを閉じてしまうと情報が得られなくなります。この場合、GetThisWorkbookLocalPath2() は空文字（長さセロの文字列）を返します。
+このようにGetThisWorkbookLocalPath2() はエクスプローラーから情報を得ていますので、該当するエクスプローラーを閉じてしまうと情報が得られなくなります。この場合、GetThisWorkbookLocalPath2() は空文字（長さゼロの文字列）を返します。
 
 ### 提案する解決策 （その３） ###  
   
@@ -71,6 +77,8 @@ SendKeysはVBAのApplication.SendKeysメソッドは使えません。自分自�
 この問題はPowerShellによって外部からExcelにキーストロークを送ることで解決できます。PowerShellで実行するキーストロークを送るスクリプトはコードの中に埋め込んでいます。
 
 キーストロークの送信タイミングはスクリプトの中のStart-Sleepコマンドレットで指定しています。余裕のあるタイミングにしていますが、WindowsやOffice環境によってはStart-Sleepのタイミングを調整する必要があるかもしません。
+
+キーストロークの送信によってウインドウが切り替わりますが正常な動作ですのでご承知おきください。キーストロークの送信に失敗した場合、GetThisWorkbookLocalPath3() は空文字（長さゼロの文字列）を返します。
 
 ### ライセンス ###
 
