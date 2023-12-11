@@ -15,10 +15,10 @@ SharePointファイルを同期するには「同期クライアント」と「O
 それぞれ前提条件がありますので、単独もしくは必要に応じて組み合わせて利用するとよいでしょう。
 
 ソースコードは標準モジュールをエクスポートしたファイルを掲載していますので、そのままインポートするか、必要な部分をコピペしてお使いください。
-異なる三つの方法を以下の３つのファイルで掲載しています。
-GetThisWorkbookLocalPath1.Bas　「最近開いた項目の表示」を利用する方法
-GetThisWorkbookLocalPath2.Bas　開いているエクスプローラーを利用する方法
-GetThisWorkbookLocalPath3.Bas　SendKeysを利用する方法
+異なる三つの方法を以下の３つのファイルで掲載しています。 
+GetThisWorkbookLocalPath1.Bas　「最近開いた項目の表示」を利用する方法 
+GetThisWorkbookLocalPath2.Bas　開いているエクスプローラーを利用する方法 
+GetThisWorkbookLocalPath3.Bas　SendKeysを利用する方法 
 
 ### 提案する解決策 （その１） ###  
   
