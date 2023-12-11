@@ -1,15 +1,14 @@
-# ThisWorkbookLocalPath
+# GetThisWorkbookLocalPath
 ## OneDriveでThisWorkbook.PathがURLを返す問題を解決する    
-### Resolve the problem of ThisWorkbook.Path returning a URL in OneDrive ###   
   
-  
-### 解決したい問題 (Problem to be solved) ### 
+### 解決したい問題 ### 
   
 OneDrive上のExcel VBAを動かすとThisWorkbook.PathがURLを返す問題が起きます。自分自身のローカルパスを取得できず、FileSystemObjectまで使えなくなるという不便な状態になります。    
-この問題の解決にはいくつかの方法が提案されていますが、URLパスを文字列処理してローカルパスに変換する方法は実際には使えません。  
-SharePointファイルを同期するには「同期クライアント」と「OneDriveへのショートカットの追加」の二つの方法があります。それぞれローカルドライブ上のパスが異なります。どちらの方法で同期されているかをURLパスから知ることはできないことや、OneDriveのフォルダー名を変更できることから、URLパスからローカルパスに変換する方法には事実上無理があります。  
+この問題の解決にはいくつかの方法が提案されていますが、URLパスを文字列処理してローカルパスに変換する方法はうまく処理できない場合があります。特に OneDrive for Business においてはURLに含まれるテナント名などの解決はほぼ不可能です。
+SharePointファイルを同期するには「同期クライアント」と「OneDriveへのショートカットの追加」の二つの方法があります。それぞれローカルドライブ上のパスが異なります。どちらの方法で同期されているかをURLパスから知ることはできません。
+このような理由からThisWorkbook.Pathが返すURLを文字列変換によってローカルパスに変換する方法には事実上無理があります。  
 
-### 提案する解決策 (Proposed Solution) ###  
+### 提案する解決策 （その１）###  
   
 ここで紹介する方法は「最近開いた項目の表示」を利用するもので、最近開いたファイルやフォルダーが
   
@@ -17,8 +16,7 @@ SharePointファイルを同期するには「同期クライアント」と「O
   
 のフォルダーにリンクファイル（LNKファイル）として自動的に記録される機能を利用してます。このリンクファイルのリンク先を取得することでローカルドライブ上のパスを得ることができます。    
   
-ローカルパスを取得する関数は ThisWorkbookLocalPath() で、OneDriveに同期したSharePointファイルのローカルドライブ上のパスを返します。つまり、ThisWorkbookLocalPath()はThisWorkbook.Pathに置き換えて使うことができます。 このマクロを任意のOneDrive上のフォルダーに置き、そのまま起動することができます。
-この関数をテストするコードは Test_ThisWorkbookLocalPath() です。  
+ローカルパスを取得する関数は GetThisWorkbookLocalPath1() です。
   
 ### レジストリーキーの読み出し ###  
   
@@ -36,15 +34,5 @@ ThisWorkbookLocalPathは2つのレジストリキーを読んで処理を実行�
   
 なお、Windowsの環境によってはStart_TrackDocsキーが設定されていない場合があります。その場合は「～に最近開いた項目の表示する」または「最近開いた項目を～に表示する」を一旦無効にしてから有効にしてください。  
   
-### HideFileExt() ###
-  
-この関数はレジストリキー  
-
-    HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\  
-
-にある HideFileExt の値を読んで、その値を返します。  
-フォルダーオプションの「登録されている拡張子は表示しない」が有効か無効かによってリンクファイルの名前が変わります。
-有効である場合、マクロ付きExcelファイルならリンクファイルは「～.xlsm.LNK」となりますが、無効である場合は「～.LNK」となります。  
-「登録されている拡張子は表示しない」が有効か無効かは HideFileExt の値を読んで判別できます。    
   
 ■    
