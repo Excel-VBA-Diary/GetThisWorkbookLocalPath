@@ -71,7 +71,9 @@ Public Function GetThisWorkbookLocalPath3() As String
         Debug.Print Time, "Retry GetFromClipboard, retry count(s)="; retryCount
         Application.Wait [NOW()+"00:00:00.1"]
     Loop
+    
     filePath = cb.GetText
+    If filePath = "" Then Exit Function
         
     '実際にファイルが存在するか確認する
     'Verify that the file actually exists

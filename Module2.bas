@@ -34,6 +34,8 @@ Public Function GetThisWorkbookLocalPath2() As String
                 End If
             Next
     End Select
+    
+    If strPath = "" Then Exit Function
                 
     '実際にファイルが存在するか確認する
     'Verify that the file actually exists
@@ -50,7 +52,7 @@ End Function
 ' エンコードされたURLをデコードする（ENCODEURL関数の逆変換）
 ' 参照設定で「Microsoft HTML Object Library」をチェックすること
 ' Decode encoded URL (reverse conversion of ENCODEURL function)
-' 'Prerequisite: Check "Microsoft HTML Object Library" in the References dialog box.
+' Prerequisite: Check "Microsoft HTML Object Library" in the References dialog box.
 '-------------------------------------------------------------------------------
 Private Function DecodeURL(ByVal URL As String) As String
     If URL = "" Then Exit Function
