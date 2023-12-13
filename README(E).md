@@ -21,9 +21,9 @@ The source code is provided as-is in the file that exports the standard module, 
   
 The three different methods are listed in the following three files.  
 
-(1) Module1.bas : Method using "Show Recently Opened Items"  
-(2) Module2.bas : Method using "Open Explorer"  
-(3) Module3.bas : Method using SendKeys  
+(Part 1) Module1.bas : Method using "Show Recently Opened Items"  
+(Part 2) Module2.bas : Method using "Open Explorer"  
+(Part 3) Module3.bas : Method using [System.Windows.Forms.SendKeys]  
 
 ### Proposed Solution (Part 1) ###  
   
