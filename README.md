@@ -46,11 +46,11 @@ Windows 10 の場合は、「スタート メニューまたはタスク バー�
   
 GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表示」をオンになっているかどうかを知るにはレジストリキーを読んで調べます。そのための関数がIs_Start_TrackDocs() です。  
   
-この関数はレジストリキー  
+この関数は次のレジストリキーにある Start_TrackDocs の値を読んで、オン(1)ならTrue、オフ(0)ならFalseを返します。   
 
     HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\  
 
-にある Start_TrackDocs の値を読んで、その値を返します。
+この関数はGetThisWorkbookLocalPath1()の中では呼び出していませんので、必要に応じて使ってください。  
 
 ## 提案する解決策 （その２）   
   
@@ -62,6 +62,8 @@ GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表�
 
 この絶対パス（URI）はエンコードされているのでデコードします。DecodeURL() 関数はそのためのものです。エンコードされるのは特定のASCII文字だけなので、簡易版のDecodeURL_ASCII() 関数も参考に記述しました。
 
+GetThisWorkbookLocalPath2() は DecodeURL() を使っていますが、DecodeURL_ASCII() に変えてもよいでしょう。 
+  
 このようにGetThisWorkbookLocalPath2() はエクスプローラーから情報を得ていますので、該当するエクスプローラーを閉じてしまうと情報が得られなくなります。この場合、GetThisWorkbookLocalPath2() は空文字（長さゼロの文字列）を返します。
 
 なお、OneDrive、OneDrive for Businessの直下（ルートフォルダー）に置かれている場合、ThisWorkbook.Pathはそれぞれ特定のURLパターンを返すので、エクスプローラーから情報を得ずとも、OneDriveにはEnviron("OneDrive")、OneDrive for BusinessにはEnviron("OneDriveCommercial")のローカルパスを対応させています。
