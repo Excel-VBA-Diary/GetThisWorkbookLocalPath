@@ -1,7 +1,7 @@
 K# GetThisWorkbookLocalPath
 ## Resolve the problem of ThisWorkbook.Path returning a URL in OneDrive  
   
-### Problem to be solved ### 
+### Problem to be solved 
   
 We have a problem with ThisWorkbook.Path returning a URL when run Excel VBA on OneDrive. This is inconvenient because my own local path can not be gotten and even FileSystemObject is not available.  
   
@@ -11,7 +11,7 @@ There are two ways to sync Teams and SharePoint files: "Sync Client" and "Add Sh
   
 For these reasons, it is virtually impossible to convert the URL returned by ThisWorkbook.Path to a local path by string processing.  
   
-### Proposed Solutions ###
+### Proposed Solutions
 
 Three different methods are proposed here.  
 The first is to use "Show Recently Opened Items," the second is to use the "Open Explorer", and the third is to use SendKeys.  
@@ -25,7 +25,7 @@ The three different methods are listed in the following three files.
 (Part 2) Module2.bas : Method using "Open Explorer"  
 (Part 3) Module3.bas : Method using [System.Windows.Forms.SendKeys]  
 
-### Proposed Solution (Part 1) ###  
+### Proposed Solution (Part 1)   
   
 The source code is Module1.bas. The function to get the local path is GetThisWorkbookLocalPath1().  
 
@@ -43,17 +43,15 @@ For Windows 10, "Show recently opened items in Jump Lists on Start or the taskba
 
 If this setting is off, the link is as described above. If this setting is off, GetThisWorkbookLocalPath1() returns an empty string (zero-length string) because the linked file (LNK file) described above is not recorded.  
   
-### How to know if "Show Recently Opened Items" is enabled or disabled  ###  
+### How to know if "Show Recently Opened Items" is enabled or disabled    
   
 Before calling GetThisWorkbookLocalPath1(), you can check by reading the registry key to know if "Show Recently Opened Items" is turned on. The function for this is Is_Start_TrackDocs().  
   
-This function reads the value of Start_TrackDocs in registry key  
+This function reads the value of Start_TrackDocs in the registry key shown below, and returns its value.
 
     HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\  
 
-and returns its value.  
-
-### Proposed Solution (Part 2) ###  
+### Proposed Solution (Part 2)   
   
 The source code is Module2.bas. The function to get the local path is GetThisWorkbookLocalPath2().  
 
@@ -67,7 +65,7 @@ Since GetThisWorkbookLocalPath2() obtains information from the explorer in this 
 
 Note that if the files are placed directly under OneDrive or OneDrive for Business (root folder), ThisWorkbook.Path returns a specific URL pattern for each, so even without obtaining information from Explorer, OneDrive will return Environ("OneDrive") for OneDrive and Environ("OneDriveCommercial") for OneDrive for Business to correspond to the local path.  
 
-### Proposed Solution (Part 3) ###  
+### Proposed Solution (Part 3)   
   
 The source code is Module3.bas. The function to get the local path is GetThisWorkbookLocalPath3().  
 
@@ -91,7 +89,7 @@ Please note that it is normal for the window to change when keystrokes are sent.
 
 If the original source code makes heavy use of ThisWorkbook.Path, simply replacing ThisWorkbook.Path with GetThisWorkbookLocalPath3() will result in frequent screen movement, so it is recommended to use a global variable such as It is recommended to minimize the number of calls to GetThisWorkbookLocalPath3() as much as possible.  
 
-### Afterword ###
+### Afterword 
 
 OneDrive, OneDrive for Business, or Teams or SharePoint can be used as a local drive by "adding a shortcut to OneDrive". This has the advantage of being used without web access in mind.  
 On the other hand, VBA is ineffective for these new mechanisms. This proposal is one way to compensate for that, but to begin with, VBA has not had any major updates since 2012, and it is hard to deny the feeling that it has been left behind in response to the new solutions Microsoft is proposing.  
@@ -101,7 +99,7 @@ Even if the problem of ThisWorkbook.Path returning URLs has been solved, the use
 Of course, VBA has a CheckOut/CheckIn method, but it is not simple because it requires flow control including retry processing.
 In this sense, this proposal should be regarded as a temporary measure in case there is no other solution.  
 
-### LICENSE ###
+### LICENSE 
 
 This code is available under the MIT License.  
 
