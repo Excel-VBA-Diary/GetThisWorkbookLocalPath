@@ -57,7 +57,7 @@ The source code is Module2.bas. The function to get the local path is GetThisWor
 
 This code retrieves the local path from Explorer showing the folder where the currently open Excel file (i.e. ThisWorkbook) is located.  
 
-Specifically, the Window object from the Explorer window is obtained, and the absolute path (URI) "file:///C://C:/Users/~/~//OneDrive~/~" is obtained with the LocationURL property.  
+Specifically, the Window object from the Explorer window is obtained, and the absolute path (URI) "file:///C:/Users/.../...//OneDrive.../..." is obtained with the LocationURL property.  
 
 This absolute path (URI) is encoded and must be decoded using the DecodeURL() function. Since only certain ASCII characters are encoded, we have also written a simplified version of the DecodeURL_ASCII() function for reference.  
 
