@@ -3,10 +3,10 @@ Option Explicit
 
 '-------------------------------------------------------------------------------
 'OneDrive上のVBAでThisWorkbook.PathがURLを返す問題を解決する
-'PowerShellから自分自身にキーストロークを送ってローカルパスを取得する
+'PowerShellからThisWorkbook(自分自身)にキーストロークを送ってローカルパスを取得する
 '参照設定で「Microsoft Forms 2.0 Object Library」をチェックすること
 'Resolve problem with ThisWorkbook.Path returning URL in VBA on OneDrive.
-'Send keystrokes from PowerShell to myself to get local path.
+'Send keystrokes from PowerShell to ThisWorkbook (myself) to get local path.
 'Prerequisite: Check "Microsoft Forms 2.0 Object Library" in the References dialog box.
 '-------------------------------------------------------------------------------
 
@@ -88,7 +88,7 @@ End Function
 
 '-------------------------------------------------------------------------------
 ' テストコード
-' Test code
+' Test code for GetThisWorkbookLocalPath3
 '-------------------------------------------------------------------------------
 Private Sub Test_GetThisWorkbookLocalPath3()
     Dim i As Long, result As String
@@ -100,6 +100,7 @@ End Sub
 
 
 '-------------------------------------------------------------------------------
-' 標準モジュールはここで終わり
+' このモジュールはここで終わり
+' The script for this module ends here
 '-------------------------------------------------------------------------------
 

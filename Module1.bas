@@ -21,19 +21,20 @@ Public Function GetThisWorkbookLocalPath1() As String
     Dim recentFolderPath As String
     recentFolderPath = Environ("USERPROFILE") & "\AppData\Roaming\Microsoft\Windows\Recent\"
     
-    Dim baseName As String, recentFileName As String
+    Dim baseName As String, lnkFilePath As String
     baseName = fso.GetBaseName(ThisWorkbook.Name)
     Select Case True
         Case fso.FileExists(recentFolderPath & ThisWorkbook.Name & ".LNK")
-            recentFileName = ThisWorkbook.Name & ".LNK"
+            lnkFilePath = recentFolderPath & ThisWorkbook.Name & ".LNK"
         Case fso.FileExists(recentFolderPath & baseName & ".LNK")
-            recentFileName = baseName & ".LNK"
+            lnkFilePath = recentFolderPath & baseName & ".LNK"
         Case Else
+            ' No LNK file exists.
             Exit Function
     End Select
     
     Dim filePath As String
-    filePath = CreateObject("WScript.Shell").CreateShortcut(recentFolderPath & recentFileName).TargetPath
+    filePath = CreateObject("WScript.Shell").CreateShortcut(lnkFilePath).TargetPath
     
     '実際にファイルが存在するか確認する
     'Verify that the file actually exists
@@ -51,10 +52,11 @@ End Function
 ' Return value: Fase=Do not display, True=display
 '-------------------------------------------------------------------------------
 Public Function Is_Start_TrackDocs() As Boolean
-    Dim errorNumber As Long
+    Dim registryKey As String
+    registryKey = "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Start_TrackDocs"
     With CreateObject("WScript.Shell")
         On Error Resume Next
-        Is_Start_TrackDocs = CBool(.RegRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Start_TrackDocs"))
+        Is_Start_TrackDocs = CBool(.RegRead(registryKey))
         If Err.Number <> 0 Then Is_Start_TrackDocs = False
         On Error GoTo 0
     End With
@@ -63,7 +65,7 @@ End Function
 
 '-------------------------------------------------------------------------------
 ' テストコード
-' Test code
+' Test code for GetThisWorkbookLocalPath1
 '-------------------------------------------------------------------------------
 Private Sub Test_GetThisWorkbookLocalPath1()
     Dim i As Long, result As String
@@ -75,5 +77,6 @@ End Sub
 
 
 '-------------------------------------------------------------------------------
-' 標準モジュールはここで終わり
+' このモジュールはここで終わり
+' The script for this module ends here
 '-------------------------------------------------------------------------------
