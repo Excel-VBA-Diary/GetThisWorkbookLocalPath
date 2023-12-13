@@ -101,7 +101,7 @@ Even if the problem of ThisWorkbook.Path returning URLs has been solved, the use
 Of course, VBA has a CheckOut/CheckIn method, but it is not simple because it requires flow control including retry processing.
 In this sense, this proposal should be regarded as a temporary measure in case there is no other solution.  
 
-### ƒ‰ƒCƒZƒ“ƒX ###
+### LICENSE ###
 
 This code is available under the MIT License.  
 
