@@ -1,7 +1,7 @@
 K# GetThisWorkbookLocalPath
-## OneDriveでThisWorkbook.PathがURLを返す問題を解決する    
+# OneDriveでThisWorkbook.PathがURLを返す問題を解決する    
   
-### 解決したい問題 ### 
+## 解決したい問題  
   
 OneDrive上のExcel VBAを動かすとThisWorkbook.PathがURLを返す問題が起きます。自分自身のローカルパスを取得できず、FileSystemObjectまで使えなくなるという不便な状態になります。  
   
@@ -11,7 +11,7 @@ TeamsやSharePointファイルを同期するには「同期クライアント�
   
 このような理由からThisWorkbook.Pathが返すURLを文字列処理によってローカルパスに変換する方法には事実上無理があります。
 
-### 提案する解決策 ###
+## 提案する解決策  
 
 ここでは異なる三つの方法を提案します。
 一つ目は「最近開いた項目の表示」を利用するもの、二つ目は開いているエクスプローラーを利用するもの、三つ目はSendKeysを利用するものです。
@@ -24,7 +24,7 @@ Module1.bas　「最近開いた項目の表示」を利用する方法
 Module2.bas　開いているエクスプローラーを利用する方法  
 Module3.bas　SendKeysを利用する方法  
 
-### 提案する解決策 （その１） ###  
+## 提案する解決策 （その１）   
   
 ソースコードはModule1.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath1() です。
 
@@ -42,7 +42,7 @@ Windows 10 の場合は、「スタート メニューまたはタスク バー�
 
 となっています。この設定がオフの場合は、上述のリンクファイル（LNKファイル）が記録されないため、GetThisWorkbookLocalPath1() は空文字（長さゼロの文字列）を返します。
   
-### レジストリキーの読み出し ###  
+### レジストリキーの読み出し   
   
 GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表示」をオンになっているかどうかを知るにはレジストリキーを読んで調べます。そのための関数がIs_Start_TrackDocs() です。  
   
@@ -52,7 +52,7 @@ GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表�
 
 にある Start_TrackDocs の値を読んで、その値を返します。
 
-### 提案する解決策 （その２） ###  
+## 提案する解決策 （その２）   
   
 ソースコードはModule2.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath2() です。
 
@@ -66,7 +66,7 @@ GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表�
 
 なお、OneDrive、OneDrive for Businessの直下（ルートフォルダー）に置かれている場合、ThisWorkbook.Pathはそれぞれ特定のURLパターンを返すので、エクスプローラーから情報を得ずとも、OneDriveにはEnviron("OneDrive")、OneDrive for BusinessにはEnviron("OneDriveCommercial")のローカルパスを対応させています。
 
-### 提案する解決策 （その３） ###  
+## 提案する解決策 （その３）   
   
 ソースコードはModule3.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath3() です。
 
@@ -90,7 +90,7 @@ SendKeysはVBAのApplication.SendKeysメソッドは使えません。自分自�
 
 もともとのソースコードでThisWorkbook.Pathを多用している場合、単純にThisWorkbook.PathをGetThisWorkbookLocalPath3()に置き換えると頻繁に画面が動くので、グローバル変数に取り込むなどしてGetThisWorkbookLocalPath3()の呼び出し回数をできるだけ少なくするとよいでしょう。
 
-### 最後に ###
+## 最後に 
 
 OneDrive、OneDrive for Business、またはTeamsやSharePointを「OneDriveへのショートカットの追加」によってローカルドライブとして利用できます。これはWebアクセスを意識せずに利用できるメリットがあります。  
 一方でこれらの新しい仕組みに対してVBAは非力です。今回の提案はそれを補う一つの方法ですが、そもそもVBAは2012年を最後に大きなアップデートはなくMicrosoftが提案する新しいソリューションに対して置き去りにされた感は否めません。  
@@ -100,7 +100,7 @@ ThisWorkbook.PathがURLを返す問題は解決されたとしても、SharePoin
 もちろんVBAにはCheckOut／CheckInのメッソドがありますが、リトライ処理を含むフロー制御が必要になり単純ではありません。
 その意味から今回の提案は、他に解決方法がない場合の暫定的な手段と捉えるべきでしょう。
 
-### ライセンス ###
+## ライセンス 
 
 このコードはMITライセンスに基づき利用できます。 
 
