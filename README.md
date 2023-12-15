@@ -42,6 +42,8 @@ Windows 10 の場合は、「スタート メニューまたはタスク バー�
 
 となっています。この設定がオフの場合は、上述のリンクファイル（LNKファイル）が記録されないため、GetThisWorkbookLocalPath1() は空文字（長さゼロの文字列）を返します。
   
+既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。  
+  
 ### レジストリキーの読み出し   
   
 GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表示」をオンになっているかどうかを知るにはレジストリキーを読んで調べます。そのための関数がIs_Start_TrackDocs() です。  
@@ -68,6 +70,8 @@ GetThisWorkbookLocalPath2() は DecodeURL() を使っていますが、DecodeURL
 
 なお、OneDrive、OneDrive for Businessの直下（ルートフォルダー）に置かれている場合、ThisWorkbook.Pathはそれぞれ特定のURLパターンを返すので、エクスプローラーから情報を得ずとも、OneDriveにはEnviron("OneDrive")、OneDrive for BusinessにはEnviron("OneDriveCommercial")のローカルパスを対応させています。
 
+既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。 
+  
 ## 提案する解決策 （その３）   
   
 ソースコードはModule3.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath3() です。
@@ -90,7 +94,7 @@ SendKeysはVBAのApplication.SendKeysメソッドは使えません。自分自�
 
 キーストロークの送信によってウインドウが切り替わりますが正常な動作ですのでご承知おきください。キーストロークの送信に失敗した場合、GetThisWorkbookLocalPath3() は空文字（長さゼロの文字列）を返します。
 
-既にローカルパスを取得済みであれば、取得済みの値を返すようにしている。これによりウインドウの切り替わりは最初のみにしている。
+既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。これによりウインドウの切り替わりは、この関数を呼び出した初回のみになります。
 
 ## 最後に 
 
