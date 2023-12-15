@@ -1,5 +1,6 @@
 K# GetThisWorkbookLocalPath
 # Resolve the problem of ThisWorkbook.Path returning a URL in OneDrive  
+Last update: December 15, 2023
   
 ## Problem to be solved 
   
