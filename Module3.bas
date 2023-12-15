@@ -17,6 +17,15 @@ Public Function GetThisWorkbookLocalPath3() As String
         Exit Function
     End If
     
+    '既に取得済みであれば、取得済みの値を返す
+    'If it has already been retrieved, the retrieved value is returned.
+    
+    Static myLocalPath As String
+    If myLocalPath <> "" Then
+        GetThisWorkbookLocalPath3 = myLocalPath
+        Exit Function
+    End If
+    
     'クリップボードに空文字を設定する
     'Set an empty character in the clipboard
     
@@ -81,7 +90,8 @@ Public Function GetThisWorkbookLocalPath3() As String
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
     If Not fso.FileExists(filePath) Then Exit Function
-    GetThisWorkbookLocalPath3 = fso.GetParentFolderName(filePath)
+    myLocalPath = fso.GetParentFolderName(filePath)
+    GetThisWorkbookLocalPath3 = myLocalPath
 
 End Function
 

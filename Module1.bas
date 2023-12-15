@@ -15,6 +15,15 @@ Public Function GetThisWorkbookLocalPath1() As String
         Exit Function
     End If
     
+    'ä˘Ç…éÊìæçœÇ›Ç≈Ç†ÇÍÇŒÅAéÊìæçœÇ›ÇÃílÇï‘Ç∑
+    'If it has already been retrieved, the retrieved value is returned.
+    
+    Static myLocalPath As String
+    If myLocalPath <> "" Then
+        GetThisWorkbookLocalPath1 = myLocalPath
+        Exit Function
+    End If
+    
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
     
@@ -40,7 +49,8 @@ Public Function GetThisWorkbookLocalPath1() As String
     'Verify that the file actually exists
     
     If Not fso.FileExists(filePath) Then Exit Function
-    GetThisWorkbookLocalPath1 = fso.GetParentFolderName(filePath)
+    myLocalPath = fso.GetParentFolderName(filePath)
+    GetThisWorkbookLocalPath1 = myLocalPath
         
 End Function
 

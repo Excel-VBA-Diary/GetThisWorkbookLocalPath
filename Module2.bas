@@ -15,6 +15,15 @@ Public Function GetThisWorkbookLocalPath2() As String
         Exit Function
     End If
     
+    'ä˘Ç…éÊìæçœÇ›Ç≈Ç†ÇÍÇŒÅAéÊìæçœÇ›ÇÃílÇï‘Ç∑
+    'If it has already been retrieved, the retrieved value is returned.
+    
+    Static myLocalPath As String
+    If myLocalPath <> "" Then
+        GetThisWorkbookLocalPath2 = myLocalPath
+        Exit Function
+    End If
+    
     Dim strPath As String, myLocationName As String, wObj As Object
     Select Case True
         Case LCase(ThisWorkbook.Path) Like "https://d.docs.live.net/????????????????"
@@ -43,7 +52,8 @@ Public Function GetThisWorkbookLocalPath2() As String
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
     If Not fso.FileExists(strPath & "\" & ThisWorkbook.Name) Then Exit Function
-    GetThisWorkbookLocalPath2 = strPath
+    myLocalPath = strPath
+    GetThisWorkbookLocalPath2 = myLocalPath
                 
 End Function
 
