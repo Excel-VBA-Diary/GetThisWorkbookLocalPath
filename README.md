@@ -90,7 +90,7 @@ SendKeysはVBAのApplication.SendKeysメソッドは使えません。自分自�
 
 キーストロークの送信によってウインドウが切り替わりますが正常な動作ですのでご承知おきください。キーストロークの送信に失敗した場合、GetThisWorkbookLocalPath3() は空文字（長さゼロの文字列）を返します。
 
-もともとのソースコードでThisWorkbook.Pathを多用している場合、単純にThisWorkbook.PathをGetThisWorkbookLocalPath3()に置き換えると頻繁に画面が動くので、グローバル変数に取り込むなどしてGetThisWorkbookLocalPath3()の呼び出し回数をできるだけ少なくするとよいでしょう。
+既にローカルパスを取得済みであれば、取得済みの値を返すようにしている。これによりウインドウの切り替わりは最初のみにしている。
 
 ## 最後に 
 
