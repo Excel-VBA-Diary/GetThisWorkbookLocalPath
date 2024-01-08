@@ -23,8 +23,8 @@ TeamsやSharePointファイルを同期するには「同期クライアント�
 これらは単独もしくは必要に応じて組み合わせて利用するとよいでしょう。
 
 ソースコードは標準モジュールをエクスポートしたファイルをそのまま掲載していますので、インポートするか、必要な部分をコピペしてお使いください。  
-\(1)のGetLocalPath関数の詳細は下記のリポジトリで紹介しています。
-  [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)
+\(1)のGetLocalPath関数の詳細は下記のリポジトリで紹介しています。  
+  [GetLocalPath関数](https://github.com/Excel-VBA-Diary/GetLocalPath)
 
 \(2)～\(4)は異なる以下の３つのファイルで掲載しています。  
 Module1.bas　「最近開いた項目の表示」を利用する方法  
