@@ -15,26 +15,30 @@ SharePointやTeamsのファイルをOneDriveで利用するには「同期」と
 
 ## 提案する解決策  
 
-ここでは異なる以下の四つの方法を提案します。  
+ここでは異なる以下の4つの方法を提案しています。  
 \(1) GetLocalPath関数を使う  
 \(2) 「最近開いた項目の表示」を利用する  
 \(3) 開いているエクスプローラーを利用する  
-\(4) SendKeysを利用するも  
-これらは単独もしくは必要に応じて組み合わせて利用するとよいでしょう。
-
+\(4) SendKeysを利用する  
+  
 ソースコードは標準モジュールをエクスポートしたファイルをそのまま掲載していますので、インポートするか、必要な部分をコピペしてお使いください。  
-\(1)のGetLocalPath関数の詳細は下記のリポジトリで紹介しています。  
+
+\(1)のGetLocalPath関数のソースコードは下記のリポジトリで紹介していますので、そちらを参照してください。    
   [GetLocalPath関数](https://github.com/Excel-VBA-Diary/GetLocalPath)
 
-\(2)～\(4)は異なる以下の３つのファイルで掲載しています。  
+\(2)～\(4)はこのリポジトリに掲載しています。  
 Module1.bas　「最近開いた項目の表示」を利用する方法  
 Module2.bas　開いているエクスプローラーを利用する方法  
 Module3.bas　SendKeysを利用する方法  
 
 ## 提案する解決策 （その１）   
   
-GetLocalPath関数の解説とソースコードは、[こちら](https://github.com/Excel-VBA-Diary/GetLocalPath) で公開しています。  
-使い方の例は次のとおりです。
+この解決策はWindowsのレジストリにあるOneDriveのマウント情報を使います。このマウント情報は次のサブキー配下にあります。  
+```
+\HKEY_CURRENT_USER\Software\SyncEngines\Providers\OneDrive
+```
+GetLocalPath関数の解説とソースコードは、[こちら](https://github.com/Excel-VBA-Diary/GetLocalPath) で紹介しています。 
+この関数を使ってThisWorkbook.Pathが返すURLパスをローカルパスに変換するには、次のような使い方になります。  
 ```
 Dim localPath As String
 localPath = GetLocalPath(ThisWorkbook.Path)
@@ -65,9 +69,9 @@ Windows 10 の場合は、「スタート メニューまたはタスク バー�
 GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表示」をオンになっているかどうかを知るにはレジストリキーを読んで調べます。そのための関数がIs_Start_TrackDocs() です。  
   
 この関数は次のレジストリキーにある Start_TrackDocs の値を読んで、オン(1)ならTrue、オフ(0)ならFalseを返します。   
-
-    HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\  
-
+```
+HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\  
+```
 この関数はGetThisWorkbookLocalPath1()の中では呼び出していませんので、必要に応じて使ってください。  
 
 ## 提案する解決策 （その３）   
