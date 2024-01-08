@@ -24,7 +24,7 @@ SharePointやTeamsのファイルをOneDriveで利用するには「同期」と
 ソースコードは標準モジュールをエクスポートしたファイルをそのまま掲載していますので、インポートするか、必要な部分をコピペしてお使いください。  
 
 \(1)のGetLocalPath関数のソースコードは下記のリポジトリで紹介していますので、そちらを参照してください。    
-  [GetLocalPath関数](https://github.com/Excel-VBA-Diary/GetLocalPath)
+  [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)
 
 \(2)～\(4)はこのリポジトリに掲載しています。  
 Module1.bas　「最近開いた項目の表示」を利用する方法  
