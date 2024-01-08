@@ -33,7 +33,7 @@ Module3.bas　SendKeysを利用する方法
 
 ## 提案する解決策 （その１）   
   
-こちらの解説とソースコードは、[こちら](https://github.com/Excel-VBA-Diary/GetLocalPath) で公開しています。  
+GetLocalPath関数の解説とソースコードは、[こちら](https://github.com/Excel-VBA-Diary/GetLocalPath) で公開しています。  
 使い方の例は次のとおりです。
 ```
 Dim localPath As String
