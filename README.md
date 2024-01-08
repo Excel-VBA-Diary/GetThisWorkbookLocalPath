@@ -1,6 +1,7 @@
 K# GetThisWorkbookLocalPath
 # OneDriveでThisWorkbook.PathがURLを返す問題を解決する 
-最終更新日：2023年12月15日  
+初回投稿日：2023年12月11日  
+最終更新日：2024年1月8日  
   
 ## 解決したい問題  
   
@@ -14,18 +15,32 @@ TeamsやSharePointファイルを同期するには「同期クライアント�
 
 ## 提案する解決策  
 
-ここでは異なる三つの方法を提案します。
-一つ目は「最近開いた項目の表示」を利用するもの、二つ目は開いているエクスプローラーを利用するもの、三つ目はSendKeysを利用するものです。
+ここでは異なる以下の四つの方法を提案します。
+\(1) GetLocalPath関数を使う
+\(2) 「最近開いた項目の表示」を利用する
+\(3) 開いているエクスプローラーを利用する
+\(4) SendKeysを利用するも
 それぞれ前提条件がありますので、単独もしくは必要に応じて組み合わせて利用するとよいでしょう。
 
 ソースコードは標準モジュールをエクスポートしたファイルをそのまま掲載していますので、インポートするか、必要な部分をコピペしてお使いください。  
-  
-異なる三つの方法を以下の３つのファイルで掲載しています。  
+\(1)のGetLocalPath関数の詳細は下記のリポジトリで紹介しています。
+  [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)
+
+\(2)～\(4)は異なる以下の３つのファイルで掲載しています。  
 Module1.bas　「最近開いた項目の表示」を利用する方法  
 Module2.bas　開いているエクスプローラーを利用する方法  
 Module3.bas　SendKeysを利用する方法  
 
 ## 提案する解決策 （その１）   
+  
+こちらの解説とソースコードは、[こちら](https://github.com/Excel-VBA-Diary/GetLocalPath) で公開しています。  
+使い方の例は次のとおりです。
+```
+Dim localPath As String
+localPath = GetLocalPath(ThisWorkbook.Path)
+```  
+  
+## 提案する解決策 （その２）   
   
 ソースコードはModule1.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath1() です。
 
@@ -55,7 +70,7 @@ GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表�
 
 この関数はGetThisWorkbookLocalPath1()の中では呼び出していませんので、必要に応じて使ってください。  
 
-## 提案する解決策 （その２）   
+## 提案する解決策 （その３）   
   
 ソースコードはModule2.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath2() です。
 
@@ -73,7 +88,7 @@ GetThisWorkbookLocalPath2() は DecodeURL() を使っていますが、DecodeURL
 
 既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。 
   
-## 提案する解決策 （その３）   
+## 提案する解決策 （その４）   
   
 ソースコードはModule3.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath3() です。
 
