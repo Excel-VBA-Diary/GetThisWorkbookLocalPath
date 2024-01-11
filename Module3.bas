@@ -2,12 +2,32 @@ Attribute VB_Name = "Module3"
 Option Explicit
 
 '-------------------------------------------------------------------------------
-'OneDrive上のVBAでThisWorkbook.PathがURLを返す問題を解決する
-'PowerShellからThisWorkbook(自分自身)にキーストロークを送ってローカルパスを取得する
-'参照設定で「Microsoft Forms 2.0 Object Library」をチェックすること
-'Resolve problem with ThisWorkbook.Path returning URL in VBA on OneDrive.
-'Send keystrokes from PowerShell to ThisWorkbook (myself) to get local path.
-'Prerequisite: Check "Microsoft Forms 2.0 Object Library" in the References dialog box.
+' OneDrive上のVBAでThisWorkbook.PathがURLを返す問題を解決する
+' PowerShellからThisWorkbook(自分自身)にキーストロークを送ってローカルパスを取得する
+' Resolve problem with ThisWorkbook.Path returning URL in VBA on OneDrive.
+' Send keystrokes from PowerShell to ThisWorkbook (myself) to get local path.
+'
+' 参照設定で「Microsoft Forms 2.0 Object Library」をチェックする.
+' ライブラリーがない場合はダミーのユーザーフォームを追加して削除すれば、
+' 自動的に表示されチェックされる.
+' Check the "Microsoft Forms 2.0 Object Library" in the References dialog box.
+' If the library is not in the dialog box, add a dummy user form and remove it,
+' then the library will automatically appear and be checked.
+'
+' Arguments: Nothing
+'
+' Return Value:
+'   Local Path of ThisWorkbook (String)
+'   Return null string if fails conversion from URL path to local path.
+'
+' Usage:
+'   Dim lp As String
+'   lp = GetThisWorkbookLocalPath2
+'
+' Author: Excel VBA Diary (@excelvba_diary)
+' Created: December 11, 2023
+' Last Updated: January, 11, 2024
+' Version: 1.002
 '-------------------------------------------------------------------------------
 
 Public Function GetThisWorkbookLocalPath3() As String
@@ -20,9 +40,9 @@ Public Function GetThisWorkbookLocalPath3() As String
     '既に取得済みであれば、取得済みの値を返す
     'If it has already been retrieved, the retrieved value is returned.
     
-    Static myLocalPath As String
-    If myLocalPath <> "" Then
-        GetThisWorkbookLocalPath3 = myLocalPath
+    Static myLocalPathCache As String, lastUpdated As Date
+    If myLocalPathCache <> "" And Now() - lastUpdated <= 30 / 86400 Then
+        GetThisWorkbookLocalPath3 = myLocalPathCache
         Exit Function
     End If
     
@@ -90,8 +110,9 @@ Public Function GetThisWorkbookLocalPath3() As String
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
     If Not fso.FileExists(filePath) Then Exit Function
-    myLocalPath = fso.GetParentFolderName(filePath)
-    GetThisWorkbookLocalPath3 = myLocalPath
+    myLocalPathCache = fso.GetParentFolderName(filePath)
+    lastUpdated = Now()
+    GetThisWorkbookLocalPath3 = myLocalPathCache
 
 End Function
 
@@ -101,11 +122,8 @@ End Function
 ' Test code for GetThisWorkbookLocalPath3
 '-------------------------------------------------------------------------------
 Private Sub Test_GetThisWorkbookLocalPath3()
-    Dim i As Long, result As String
-    For i = 1 To 10
-        result = GetThisWorkbookLocalPath3()
-        Debug.Print Time, i, result
-    Next
+    Debug.Print "URL Path", ThisWorkbook.Path
+    Debug.Print "Local Path", GetThisWorkbookLocalPath3
 End Sub
 
 
