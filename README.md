@@ -5,7 +5,7 @@ K# GetThisWorkbookLocalPath
   
 ## 解決したい問題  
   
-OneDrive上のExcel VBAを動かすとThisWorkbook.PathがURLを返す問題が起きます。自分自身のローカルパスを取得できず、FileSystemObjectまで使えなくなるという不便な状態になります。  
+OneDrive上でExcel VBAを動かすとThisWorkbook.PathがURLを返す問題が起きます。このままでは自分自身のローカルパスを取得できず、Dir関数やFileSystemObjectまで使えなくなるという不便な状態になります。  
   
 この問題の解決にはいくつかの方法が提案されています。個人用OneDriveならば文字列変換で対応可能ですが、SharePointのファイルをOneDrive for Businessを経由して操作する場合、URLパスを文字列処理だけでローカルパスに変換する方法はうまくいきません。URLに含まれるテナントコードをテナント名に変換するなどの処理が必要で、文字列処理による方法では解決できません。  
   
