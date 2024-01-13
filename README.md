@@ -49,7 +49,7 @@ Windows 10 の場合は、「スタート メニューまたはタスク バー�
   
 既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。ただし前回取得から30秒を超えた場合は再度リンクファイルのリンク先を取得します。    
   
-#### レジストリキーの読み出し   
+### 補足：レジストリキーの読み出し   
   
 GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表示」をオンになっているかどうかを知るにはレジストリキーを読んで調べます。そのための関数がIs_Start_TrackDocs() です。  
   
@@ -57,7 +57,7 @@ GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表�
 ```
 HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\  
 ```
-この関数はGetThisWorkbookLocalPath1()の中では呼び出していませんので、必要に応じて使ってください。  
+Is_Start_TrackDocs() 関数はGetThisWorkbookLocalPath1()の中では呼び出していませんので、必要に応じて使ってください。  
 
 ## 提案する解決策 （その２）   
   
