@@ -61,7 +61,9 @@ This code retrieves the local path from Explorer showing the folder where the cu
 
 Specifically, the Window object from the Explorer window is obtained, and the absolute path (URI) "file:///C:/Users/.../...//OneDrive.../..." is obtained with the LocationURL property.  
 
-This absolute path (URI) is encoded and must be decoded using the DecodeURL() function. Since only certain ASCII characters are encoded, we have also written a simplified version of the DecodeURL_ASCII() function for reference.  
+This absolute path (URI) is encoded and must be decoded; the DecodeURL_ASCII() function is for that purpose. Only certain ASCII characters are decoded by this function.  
+  
+The full-set version of the DecodeURL function is also written for reference. This is the inverse function of the ENCODEURL function, which is an Excel worksheet function. It is prepared in case it is encoded in the future.   
 
 Since GetThisWorkbookLocalPath2() obtains information from the explorer in this way, the information will not be available if the corresponding explorer is closed. In this case, GetThisWorkbookLocalPath2() returns an empty string (zero-length string).  
 
