@@ -16,35 +16,20 @@ SharePointやTeamsのファイルをOneDriveで利用するには「同期」と
 ## 提案する解決策  
 
 ここでは異なる以下の4つの方法を提案しています。  
-\(1) GetLocalPath関数を使う  
-\(2) 「最近開いた項目の表示」を利用する  
-\(3) 開いているエクスプローラーを利用する  
-\(4) SendKeysを利用する  
+\(1) 「最近開いた項目の表示」を利用する  
+\(2) 開いているエクスプローラーを利用する  
+\(3) SendKeysを利用する  
+\(4) GetLocalPath関数を使う 
   
-ソースコードは標準モジュールをエクスポートしたファイルをそのまま掲載していますので、インポートするか、必要な部分をコピペしてお使いください。  
-
-\(1)のGetLocalPath関数のソースコードは下記のリポジトリで紹介していますので、そちらを参照してください。    
-  [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)
-
-\(2)～\(4)はこのリポジトリに掲載しています。  
+\(1)～\(3)のソースコードはこのリポジトリに掲載しています。標準モジュールをエクスポートしたファイルをそのまま掲載していますので、インポートするか、必要な部分をコピペしてお使いください。  
 Module1.bas　「最近開いた項目の表示」を利用する方法  
 Module2.bas　開いているエクスプローラーを利用する方法  
 Module3.bas　SendKeysを利用する方法  
 
+\(4)のGetLocalPath関数のソースコードは下記のリポジトリで紹介していますので、そちらを参照してください。    
+  [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)
+
 ## 提案する解決策 （その１）   
-  
-この解決策はWindowsのレジストリにあるOneDriveのマウント情報を使います。このマウント情報は次のサブキー配下にあります。  
-```
-\HKEY_CURRENT_USER\Software\SyncEngines\Providers\OneDrive
-```
-GetLocalPath関数の解説とソースコードは、[こちら](https://github.com/Excel-VBA-Diary/GetLocalPath) で紹介しています。 
-この関数を使ってThisWorkbook.Pathが返すURLパスをローカルパスに変換するには、次のような使い方になります。  
-```
-Dim localPath As String
-localPath = GetLocalPath(ThisWorkbook.Path)
-```  
-  
-## 提案する解決策 （その２）   
   
 ソースコードはModule1.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath1() です。
 
@@ -62,9 +47,9 @@ Windows 10 の場合は、「スタート メニューまたはタスク バー�
 
 となっています。この設定がオフの場合は、上述のリンクファイル（LNKファイル）が記録されないため、GetThisWorkbookLocalPath1() は空文字（長さゼロの文字列）を返します。
   
-既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。  
+既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。ただし前回取得から30秒を超えた場合は再度リンクファイルのリンク先を取得します。    
   
-### レジストリキーの読み出し   
+#### レジストリキーの読み出し   
   
 GetThisWorkbookLocalPath1() を呼び出す前に「最近開いた項目の表示」をオンになっているかどうかを知るにはレジストリキーを読んで調べます。そのための関数がIs_Start_TrackDocs() です。  
   
@@ -74,7 +59,7 @@ HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\
 ```
 この関数はGetThisWorkbookLocalPath1()の中では呼び出していませんので、必要に応じて使ってください。  
 
-## 提案する解決策 （その３）   
+## 提案する解決策 （その２）   
   
 ソースコードはModule2.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath2() です。
 
@@ -92,9 +77,11 @@ GetThisWorkbookLocalPath2() は DecodeURL() を使っていますが、DecodeURL
 
 なお、OneDrive、OneDrive for Businessの直下（ルートフォルダー）に置かれている場合、ThisWorkbook.Pathはそれぞれ特定のURLパターンを返すので、エクスプローラーから情報を得ずとも、OneDriveにはEnviron("OneDrive")、OneDrive for BusinessにはEnviron("OneDriveCommercial")のローカルパスを対応させています。
 
-既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。 
+既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。ただし前回取得から30秒を超えた場合は再度Windowオブジェクトから絶対パスを取得します。  
   
-## 提案する解決策 （その４）   
+この解決策はThisWorkbookが置かれているフォルダーがエクスプローラで表示されていることが条件になります。したがって、そのエクスプローラーが閉じられている場合はGetThisWorkbookLocalPath2() は空文字（長さゼロの文字列）を返します。  
+  
+## 提案する解決策 （その３）   
   
 ソースコードはModule3.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath3() です。
 
@@ -116,8 +103,23 @@ SendKeysはVBAのApplication.SendKeysメソッドは使えません。自分自�
 
 キーストロークの送信によってウインドウが切り替わりますが正常な動作ですのでご承知おきください。キーストロークの送信に失敗した場合、GetThisWorkbookLocalPath3() は空文字（長さゼロの文字列）を返します。
 
-既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。これによりウインドウの切り替わりは、この関数を呼び出した初回のみになります。
+前回取得から30秒以内であれば、キーストロークの送信は行わず、取得済みの値を返すようにしています。これによってウインドウの切り替わりは起きません。前回取得から30秒を超えた場合は再度キーストロークを送信します。  
 
+この解決策はPowerShellを使っていますので、お使いのPC環境によってはセキュリティ保護が働きPowerShellを起動できない場合があります。  
+  
+## 提案する解決策 （その４）   
+  
+この解決策はWindowsのレジストリにあるOneDriveのマウント情報を使います。このマウント情報は次のサブキー配下にあります。  
+```
+\HKEY_CURRENT_USER\Software\SyncEngines\Providers\OneDrive
+```
+GetLocalPath関数の解説とソースコードは、[こちら](https://github.com/Excel-VBA-Diary/GetLocalPath) で紹介しています。 
+この関数を使ってThisWorkbook.Pathが返すURLパスをローカルパスに変換するには、次のような使い方になります。  
+```
+Dim localPath As String
+localPath = GetLocalPath(ThisWorkbook.Path)
+```  
+  
 ## 最後に 
 
 SharePointやTeamsのドキュメントライブラリーのフォルダーを「同期」や「OneDriveへのショートカットの追加」によって、OneDrive for Businessを経由することでローカルドライブとして利用できます。これはWebアクセスを意識せずに利用できるメリットがあります。  
