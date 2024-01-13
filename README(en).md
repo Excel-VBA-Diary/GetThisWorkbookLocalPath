@@ -1,16 +1,17 @@
 K# GetThisWorkbookLocalPath
 # Resolve the problem of ThisWorkbook.Path returning a URL in OneDrive  
-Last update: December 15, 2023
+Created: December 15, 2023
+Last update: January 14, 2024
   
 ## Problem to be solved 
   
-We have a problem with ThisWorkbook.Path returning a URL when run Excel VBA on OneDrive. This is inconvenient because my own local path can not be gotten and even FileSystemObject is not available.  
-  
-Several methods have been proposed to solve this problem, but the method of converting URL paths to local paths by string processing may not work. In particular, OneDrive for Business requires converting tenant codes in URLs to tenant names, which cannot be solved by string processing.  
-  
-There are two ways to sync Teams and SharePoint files: "Sync Client" and "Add Shortcut to OneDrive", but each of them has a different path on the local drive, and it is not possible to know from the URL path which method is used to sync.  
-  
-For these reasons, it is virtually impossible to convert the URL returned by ThisWorkbook.Path to a local path by string processing.  
+There is a problem with ThisWorkbook.Path returning a URL when Excel VBA runs on OneDrive. This is inconvenient because you cannot get your own local path and you cannot use the Dir function or even FileSystemObject.
+
+Several methods have been proposed to solve this problem. For personal OneDrive, string conversion can be used, but when manipulating SharePoint files via OneDrive for Business, the method of converting URL paths to local paths using only string processing will not work. The conversion of the tenant code in the URL to a tenant name, for example, is required and cannot be solved by string processing.
+
+There are two ways to use SharePoint and Teams files in OneDrive: "Synchronize" and "Add shortcut to OneDrive", but the paths on the local drive are different for each method, and furthermore, it is not possible to know from the URL path which method is used for synchronization. This is why OneDrive is not available.
+
+For these reasons, it is virtually impossible in OneDrive for Business to convert the URL returned by ThisWorkbook.Path to a local path through string processing.
   
 ## Proposed Solutions
 
