@@ -82,8 +82,10 @@ HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\
 
 具体的には、エクスプローラーのウインドウからのWindowオブジェクトを取得しLocationURLプロパティで"file:///C:/Users/～/～/OneDrive～/～"という絶対パス（URI）を取得します。
 
-この絶対パス（URI）はエンコードされているのでデコードします。DecodeURL() 関数はそのためのものです。エンコードされるのは特定のASCII文字だけなので、簡易版のDecodeURL_ASCII() 関数も参考に記述しました。
+この絶対パス（URI）はエンコードされているのでデコードします。DecodeURL_ASCII()関数はそのためのものです。この関数でデコードされるのは特定のASCII文字だけです。  
 
+フルセット版のDecodeURL関数も参考に記述しました。こちらはExcelのワークシート関数であるENCODEURL関数の逆関数になります。将来フルエンコードされた場合を想定して準備しています。  
+  
 GetThisWorkbookLocalPath2() は DecodeURL() を使っていますが、DecodeURL_ASCII() に変えてもよいでしょう。 
   
 このようにGetThisWorkbookLocalPath2() はエクスプローラーから情報を得ていますので、該当するエクスプローラーを閉じてしまうと情報が得られなくなります。この場合、GetThisWorkbookLocalPath2() は空文字（長さゼロの文字列）を返します。
