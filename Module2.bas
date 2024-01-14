@@ -19,8 +19,8 @@ Option Explicit
 '
 ' Author: Excel VBA Diary (@excelvba_diary)
 ' Created: December 11, 2023
-' Last Updated: January, 11, 2024
-' Version: 1.002
+' Last Updated: January, 14, 2024
+' Version: 1.003
 ' License: MIT
 '-------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ Public Function GetThisWorkbookLocalPath2() As String
     Select Case True
         Case LCase(ThisWorkbook.Path) Like "https://d.docs.live.net/????????????????"
             myLocalPath = Environ("OneDrive")
-        Case LCase(ThisWorkbook.Path) Like "https://*-my.sharepoint.com/personal/*microsoft_com/documents"
+        Case LCase(ThisWorkbook.Path) Like "https://*-my.sharepoint.com/personal/*/documents"
             myLocalPath = Environ("OneDriveCommercial")
         Case Else
             urlFolderName = Mid(ThisWorkbook.Path, InStrRev(ThisWorkbook.Path, "/") + 1)
