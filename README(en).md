@@ -23,10 +23,14 @@ The source code is provided as-is in the file that exports the standard module, 
   
 The three different methods are listed in the following three files.  
 
-(Part 1) Module1.bas : Method using "Show Recently Opened Items"  
-(Part 2) Module2.bas : Method using "Open Explorer"  
-(Part 3) Module3.bas : Method using [System.Windows.Forms.SendKeys]  
-
+(Part 1) Module1.bas : Use "Show Recently Opened Items"  
+(Part 2) Module2.bas : Use "Open Explorer"  
+(Part 3) Module3.bas : Use [System.Windows.Forms.SendKeys]  
+(Part 4) Use GetLocalPath function  
+  
+The source code of the GetLocalPath function in (4) can be found in the following repository.
+  [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)
+  
 ## Proposed Solution (Part 1)   
   
 The source code is Module1.bas. The function to get the local path is GetThisWorkbookLocalPath1().  
