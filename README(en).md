@@ -103,7 +103,7 @@ The solution uses the OneDrive mount information in the Windows registry. This m
 ```
 \HKEY_CURRENT_USER\Software\SyncEngines\Providers\OneDrive
 ```
-A description and source code for the GetLocalPath function can be found [here](https://github.com/Excel-VBA-Diary/GetLocalPath). 
+A description and source code for the GetLocalPath function can be found [here](https://github.com/Excel-VBA-Diary/GetLocalPath).   
 To convert the URL path returned by ThisWorkbook.Path to a local path using this function, use the following: 
 ```
 Dim localPath As String
