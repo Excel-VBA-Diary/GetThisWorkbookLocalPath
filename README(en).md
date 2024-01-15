@@ -16,18 +16,18 @@ For these reasons, it is virtually impossible in OneDrive for Business to conver
 ## Proposed Solutions
 
 Four different methods are proposed here.    
-(Part 1) Use "Show Recently Opened Items"  
-(Part 2) Use "Open Explorer"  
-(Part 3) Use [System.Windows.Forms.SendKeys]  
-(Part 4) Use GetLocalPath function  
+(Part 1)  Use "Show Recently Opened Items"  
+(Part 2)  Use "Open Explorer"  
+(Part 3)  Use "System.Windows.Forms.SendKeys"  
+(Part 4)  Use GetLocalPath function  
   
 The source code for (1) through (3) is available in this repository. The files exported from the standard modules are posted as they are, so please import them or copy and paste the necessary parts.
-(Part 1) Module1.bas  
-(Part 2) Module2.bas  
-(Part 3) Module3.bas  
+(Part 1)  Module1.bas  
+(Part 2)  Module2.bas  
+(Part 3)  Module3.bas  
   
 The source code of the GetLocalPath function in (4) can be found in the following repository.  
-  [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)  
+   [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)  
   
 ## Proposed Solution (Part 1)   
   
