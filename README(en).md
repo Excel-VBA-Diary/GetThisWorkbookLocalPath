@@ -28,7 +28,7 @@ The three different methods are listed in the following three files.
 (Part 3) Module3.bas : Use [System.Windows.Forms.SendKeys]  
 (Part 4) Use GetLocalPath function  
   
-The source code of the GetLocalPath function in (4) can be found in the following repository.
+The source code of the GetLocalPath function in (4) can be found in the following repository.  
   [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)
   
 ## Proposed Solution (Part 1)   
