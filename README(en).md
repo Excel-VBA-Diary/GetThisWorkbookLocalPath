@@ -97,6 +97,19 @@ Please note that it is normal for the window to change when keystrokes are sent.
 
 If the original source code makes heavy use of ThisWorkbook.Path, simply replacing ThisWorkbook.Path with GetThisWorkbookLocalPath3() will result in frequent screen movement, so it is recommended to use a global variable such as It is recommended to minimize the number of calls to GetThisWorkbookLocalPath3() as much as possible.  
 
+## Proposed Solution (Part 4)    
+  
+The solution uses the OneDrive mount information in the Windows registry. This mount information is located under the following subkeys:  
+```
+\HKEY_CURRENT_USER\Software\SyncEngines\Providers\OneDrive
+```
+A description and source code for the GetLocalPath function can be found [here](https://github.com/Excel-VBA-Diary/GetLocalPath). 
+To convert the URL path returned by ThisWorkbook.Path to a local path using this function, use the following: 
+```
+Dim localPath As String
+localPath = GetLocalPath(ThisWorkbook.Path)
+```  
+
 ## Afterword 
 
 OneDrive, OneDrive for Business, or Teams or SharePoint can be used as a local drive by "adding a shortcut to OneDrive". This has the advantage of being used without web access in mind.  
