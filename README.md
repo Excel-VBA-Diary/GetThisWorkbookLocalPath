@@ -71,13 +71,13 @@ Is_Start_TrackDocs() 関数はGetThisWorkbookLocalPath1()の中では呼び出�
 
 フルセット版のDecodeURL関数も参考に記述しました。こちらはExcelのワークシート関数であるENCODEURL関数の逆関数になります。将来フルエンコードされた場合を想定して準備しています。  
   
-GetThisWorkbookLocalPath2() は DecodeURL() を使っていますが、DecodeURL_ASCII() に変えてもよいでしょう。 
+GetThisWorkbookLocalPath2() は DecodeURL_ASCII() を使っていますが、DecodeURL() に変えてもよいでしょう。 
   
-このようにGetThisWorkbookLocalPath2() はエクスプローラーから情報を得ていますので、該当するエクスプローラーを閉じてしまうと情報が得られなくなります。この場合、GetThisWorkbookLocalPath2() は空文字（長さゼロの文字列）を返します。
+このようにGetThisWorkbookLocalPath2() は開いているエクスプローラーから情報を得ていますので、そのエクスプローラーを閉じてしまうと情報が得られなくなります。この場合、GetThisWorkbookLocalPath2() は空文字（長さゼロの文字列）を返します。
 
 なお、OneDrive、OneDrive for Businessの直下（ルートフォルダー）に置かれている場合、ThisWorkbook.Pathはそれぞれ特定のURLパターンを返すので、エクスプローラーから情報を得ずとも、OneDriveにはEnviron("OneDrive")、OneDrive for BusinessにはEnviron("OneDriveCommercial")のローカルパスを対応させています。
 
-既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。ただし前回取得から30秒を超えた場合は再度Windowオブジェクトから絶対パスを取得します。  
+既にローカルパスを取得済みであれば、取得済みの値を返すようにしています。ただし前回取得から30秒を超えた場合は再度、エクスプローラーからローカルパスを取得します。  
   
 この解決策はThisWorkbookが置かれているフォルダーがエクスプローラで表示されていることが条件になります。したがって、そのエクスプローラーが閉じられている場合はGetThisWorkbookLocalPath2() は空文字（長さゼロの文字列）を返します。  
   
