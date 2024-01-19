@@ -8,10 +8,12 @@ K# GetThisWorkbookLocalPath
 OneDrive上でExcel VBAを動かすとThisWorkbook.PathがURLを返す問題が起きます。このままでは自分自身のローカルパスを取得できず、Dir関数やFileSystemObjectまで使えなくなるという不便な状態になります。  
   
 この問題の解決にはいくつかの方法が提案されています。個人用OneDriveならば文字列変換で対応可能ですが、SharePointのファイルをOneDrive for Businessを経由して操作する場合、URLパスを文字列処理だけでローカルパスに変換する方法はうまくいきません。URLに含まれるテナントコードをテナント名に変換するなどの処理が必要で、文字列処理による方法では解決できません。  
-  
-SharePointやTeamsのファイルをOneDriveで利用するには「同期」と「OneDriveへのショートカットの追加」の二つの方法があります。  
-![OneDrive-Registory-1](OneDrive-Sync_vs_ShortCut-1.png)  
+    
+SharePointやTeamsのファイルをOneDrive for Business![Cloud-icon](https://github.com/Excel-VBA-Diary/GetThisWorkbookLocalPath/assets/74127005/5a3f6ab4-51e4-4272-9b73-343a36dc84da)
+で利用するには「同期」と「OneDriveへのショートカットの追加」の二つの方法があります。  
+![OneDrive-Sync-ShortCut](OneDrive-Sync_vs_ShortCut-1.png)  
 「同期」は建物アイコンの下に、「OneDriveへのショートカットの追加」は雲アイコンの下に対象となるフォルダーがぶら下がります。それぞれローカルドライブ上のパスが異なりますが、どちらの方法でSharePointやTeamsのファイルにアクセスしているのかURLパスから知ることはできません。  
+![OneDrive-Icons](OneDrive-Icons1.png)    
   
 このような理由からOneDrive for Businessにおいて、ThisWorkbook.Pathが返すURLを文字列処理によってローカルパスに変換する方法には事実上無理があります。
 
