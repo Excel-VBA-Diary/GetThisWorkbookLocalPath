@@ -35,7 +35,7 @@ localPath = GetLocalPath(ThisWorkbook.Path)
 ```  
 ### GetLocalPath関数以外の方法    
 
-ここでは異なる以下の3つの方法を提案しています。  
+ここでは異なる以下の3つの方法を提案しています。いずれの方法も"ThisWorkbook.Path"を置き換えるためのもので、GetLocalPath関数のように汎用的にURLパスをローカルパスに変換するものではありません。  
 \(1) 「最近開いた項目の表示」を利用する  
 \(2) 開いているエクスプローラーを利用する  
 \(3) SendKeysを利用する  
@@ -75,7 +75,7 @@ HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\
 ```
 Is_Start_TrackDocs() 関数はGetThisWorkbookLocalPath1()の中では呼び出していませんので、必要に応じて使ってください。  
 
-### \(2) 開いているエクスプローラーを利用する    
+#### \(2) 開いているエクスプローラーを利用する    
   
 ソースコードはModule2.basです。ローカルパスを取得する関数は GetThisWorkbookLocalPath2() です。
 
