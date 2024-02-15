@@ -2,7 +2,7 @@
 # OneDriveでThisWorkbook.PathがURLを返す問題を解決する 
 [README(en).md](https://github.com/Excel-VBA-Diary/GetThisWorkbookLocalPath/blob/main/README(en).md) for English version  
 初回投稿日：2023年12月11日  
-最終更新日：2024年1月19日  
+最終更新日：2024年2月16日  
   
 ## 解決したい問題  
   
