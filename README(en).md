@@ -39,14 +39,14 @@ localPath = GetLocalPath(ThisWorkbook.Path)
   
 ### Methods other than GetLocalPath function 
 Three different methods are proposed here. All methods are for replacing "ThisWorkbook.Path" and do not convert URL paths to local paths in a generic way like the GetLocalPath function.       
-(Part 1)  Use "Show Recently Opened Items"  
-(Part 2)  Use "Open Explorer"  
-(Part 3)  Use "System.Windows.Forms.SendKeys"  
+(1)  Use "Show Recently Opened Items"  
+(2)  Use "Open Explorer"  
+(3)  Use "System.Windows.Forms.SendKeys"  
   
 The source code for (1) through (3) is available in this repository. The files exported from the standard modules are posted as they are, so please import them or copy and paste the necessary parts.  
-(Part 1)  Module1.bas  
-(Part 2)  Module2.bas  
-(Part 3)  Module3.bas  
+Module1.bas  Use "Show Recently Opened Items"  
+Module2.bas  Use "Open Explorer"  
+Module3.bas  Use "System.Windows.Forms.SendKeys"    
   
 #### \(1) Use "View Recently Opened Items".     
   
