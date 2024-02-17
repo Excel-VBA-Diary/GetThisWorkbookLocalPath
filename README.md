@@ -28,6 +28,10 @@ URLパスをローカルパスに変換するGetLocalPath関数の解説とソ�
 ```
 \HKEY_CURRENT_USER\Software\SyncEngines\Providers\OneDrive
 ```
+さらにローカルにあるOneDrive設定情報を取得してマウント情報を補完します。
+```
+C:\Users\<USER-NAME>\AppData\Local\Microsoft\OneDrive\Settings  
+```
 この関数を使ってThisWorkbook.Pathが返すURLパスをローカルパスに変換するには、次のような使い方になります。  
 ```
 Dim localPath As String
