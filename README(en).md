@@ -10,10 +10,10 @@ There is a problem with ThisWorkbook.Path returning a URL when Excel VBA runs on
 Several methods have been proposed to solve this problem. For personal OneDrive, string conversion can be used, but when manipulating SharePoint files via OneDrive for Business, the method of converting URL paths to local paths using only string processing will not work. The conversion of the tenant code in the URL to a tenant name, for example, is required and cannot be solved by string processing.
 
 There are two ways to use SharePoint and Teams files in OneDrive: "Synchronize" and "Add shortcut to OneDrive".   
-![SharePoint-Sync_ShortCut-1](SharePoint-Sync_ShortCut-1.png)  
+![SharePoint-Sync_ShortCut-1](SharePoint-Sync_ShortCut-1(en).png)  
 
 The target folders hang below the building icon for "Sync" and below the cloud icon for "Add shortcut to OneDrive." Each has a different path on the local drive, but it is not possible to tell from the URL path which method is accessing the SharePoint or Teams files. 
-![OneDrive-Icons](OneDrive-Icons1(en).png)  
+![OneDrive-Icons](OneDrive-Icons1.png)  
   
 For these reasons, it is virtually impossible in OneDrive for Business to convert the URL returned by ThisWorkbook.Path to a local path through string processing.
   
