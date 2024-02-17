@@ -3,7 +3,7 @@ K# GetThisWorkbookLocalPath
 Created: December 11, 2023  
 Last updated: January 17, 2024  
   
-## Problem to be solved 
+## 1. Problem to be solved 
   
 There is a problem with ThisWorkbook.Path returning a URL when Excel VBA runs on OneDrive. This is inconvenient because you cannot get your own local path and you cannot use the Dir function or even FileSystemObject.
 
@@ -17,10 +17,10 @@ The target folders hang below the building icon for "Sync" and below the cloud i
   
 For these reasons, it is virtually impossible in OneDrive for Business to convert the URL returned by ThisWorkbook.Path to a local path through string processing.
   
-## Proposed Solutions
+## 2. Proposed Solutions
   
 ### Using the GetLocalPath function
-The description and source code of the GetLocalPath function, which converts a URL path to a local path, can be found in the following repository for more information.    
+The description and source code for the GetLocalPath function, which converts a URL path to a local path, can be found in the following repository for more information.  
 [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)   
   
 This solution uses the OneDrive mount information in the Windows registry. This mount information is located under the following subkey.  
@@ -39,9 +39,9 @@ localPath = GetLocalPath(ThisWorkbook.Path)
   
 ### Methods other than GetLocalPath function 
 Three different methods are proposed here. All methods are for replacing "ThisWorkbook.Path" and do not convert URL paths to local paths in a generic way like the GetLocalPath function.       
-(1)  Use "Show Recently Opened Items"  
-(2)  Use "Open Explorer"  
-(3)  Use "System.Windows.Forms.SendKeys"  
+(1) Use "Show Recently Opened Items"  
+(2) Use "Open Explorer"  
+(3) Use "System.Windows.Forms.SendKeys"  
   
 The source code for (1) through (3) is available in this repository. The files exported from the standard modules are posted as they are, so please import them or copy and paste the necessary parts.  
 Module1.bas  Use "Show Recently Opened Items"  
@@ -114,7 +114,7 @@ Please note that it is normal for the window to change when keystrokes are sent.
 
 If the original source code makes heavy use of ThisWorkbook.Path, simply replacing ThisWorkbook.Path with GetThisWorkbookLocalPath3() will result in frequent screen movement, so it is recommended to use a global variable such as It is recommended to minimize the number of calls to GetThisWorkbookLocalPath3() as much as possible.  
 
-## Afterword 
+## 3. Afterword 
 
 OneDrive, OneDrive for Business, or Teams or SharePoint can be used as a local drive by "adding a shortcut to OneDrive". This has the advantage of being used without web access in mind.  
 On the other hand, VBA is ineffective for these new mechanisms. This proposal is one way to compensate for that, but to begin with, VBA has not had any major updates since 2012, and it is hard to deny the feeling that it has been left behind in response to the new solutions Microsoft is proposing.  
@@ -124,7 +124,7 @@ Even if the problem of ThisWorkbook.Path returning URLs has been solved, the use
 Of course, VBA has a CheckOut/CheckIn method, but it is not simple because it requires flow control including retry processing.
 In this sense, this proposal should be regarded as a temporary measure in case there is no other solution.  
 
-## LICENSE 
+## 4. LICENSE 
 
 This code is available under the MIT License.  
 
