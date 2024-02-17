@@ -11,8 +11,8 @@ Several methods have been proposed to solve this problem. For personal OneDrive,
 
 There are two ways to use SharePoint and Teams files in OneDrive: "Synchronize" and "Add shortcut to OneDrive".   
 ![SharePoint-Sync_ShortCut-1](SharePoint-Sync_Shortcut-1(en).png)  
-
-The target folders hang below the building icon for "Sync" and below the cloud icon for "Add shortcut to OneDrive." Each has a different path on the local drive, but it is not possible to tell from the URL path which method is accessing the SharePoint or Teams files. 
+  
+The target folders hang below the building icon for "Sync" and below the cloud icon for "Add shortcut to OneDrive." Each has a different path on the local drive, but it is not possible to tell from the URL path which method is accessing the SharePoint or Teams files.  
 ![OneDrive-Icons](OneDrive-Icons1.png)  
   
 For these reasons, it is virtually impossible in OneDrive for Business to convert the URL returned by ThisWorkbook.Path to a local path through string processing.
