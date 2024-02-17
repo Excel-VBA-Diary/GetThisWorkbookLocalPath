@@ -2,7 +2,7 @@
 # OneDriveでThisWorkbook.PathがURLを返す問題を解決する 
 [README(en).md](https://github.com/Excel-VBA-Diary/GetThisWorkbookLocalPath/blob/main/README(en).md) for English version  
 初回投稿日：2023年12月11日  
-最終更新日：2024年2月16日  
+最終更新日：2024年2月17日  
   
 ## 1. 解決したい問題  
   
@@ -37,6 +37,8 @@ C:\Users\<USER-NAME>\AppData\Local\Microsoft\OneDrive\Settings
 Dim localPath As String
 localPath = GetLocalPath(ThisWorkbook.Path)
 ```  
+特段の事情がなければこのGetLocalPath関数を使うことを推奨します。  
+
 ### GetLocalPath関数以外の方法    
 
 ここでは異なる以下の3つの方法を提案しています。いずれの方法も"ThisWorkbook.Path"を置き換えるためのもので、GetLocalPath関数のように汎用的にURLパスをローカルパスに変換するものではありません。  
