@@ -36,6 +36,7 @@ To convert the URL path returned by ThisWorkbook.Path to a local path using this
 Dim localPath As String
 localPath = GetLocalPath(ThisWorkbook.Path)
 ```  
+I recommend using this GetLocalPath function unless there are special circumstances.  
   
 ### Methods other than GetLocalPath function 
 Three different methods are proposed here. All methods are for replacing "ThisWorkbook.Path" and do not convert URL paths to local paths in a generic way like the GetLocalPath function.       
