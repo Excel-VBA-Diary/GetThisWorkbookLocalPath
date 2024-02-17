@@ -1,7 +1,7 @@
 K# GetThisWorkbookLocalPath
 # Resolve the problem of ThisWorkbook.Path returning a URL in OneDrive  
 Created: December 11, 2023  
-Last updated: January 15, 2024  
+Last updated: January 17, 2024  
   
 ## Problem to be solved 
   
@@ -9,27 +9,46 @@ There is a problem with ThisWorkbook.Path returning a URL when Excel VBA runs on
 
 Several methods have been proposed to solve this problem. For personal OneDrive, string conversion can be used, but when manipulating SharePoint files via OneDrive for Business, the method of converting URL paths to local paths using only string processing will not work. The conversion of the tenant code in the URL to a tenant name, for example, is required and cannot be solved by string processing.
 
-There are two ways to use SharePoint and Teams files in OneDrive: "Synchronize" and "Add shortcut to OneDrive", but the paths on the local drive are different for each method, and furthermore, it is not possible to know from the URL path which method is used for synchronization. This is why OneDrive is not available.
+There are two ways to use SharePoint and Teams files in OneDrive: "Synchronize" and "Add shortcut to OneDrive".   
+![SharePoint-Sync_ShortCut-1](SharePoint-Sync_ShortCut-1.png)  
 
+The target folders hang below the building icon for "Sync" and below the cloud icon for "Add shortcut to OneDrive." Each has a different path on the local drive, but it is not possible to tell from the URL path which method is accessing the SharePoint or Teams files. 
+![OneDrive-Icons](OneDrive-Icons1(en).png)  
+  
 For these reasons, it is virtually impossible in OneDrive for Business to convert the URL returned by ThisWorkbook.Path to a local path through string processing.
   
 ## Proposed Solutions
-
-Four different methods are proposed here.    
+  
+### Using the GetLocalPath function
+The description and source code of the GetLocalPath function, which converts a URL path to a local path, can be found in the following repository for more information.    
+[GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)   
+  
+This solution uses the OneDrive mount information in the Windows registry. This mount information is located under the following subkey.  
+````
+\HKEY_CURRENT_USER\Software\SyncEngines\Providers\OneDrive
+````
+In addition, GetLocalPath retrieves locally located OneDrive configuration information and completes the mount information.  
+```
+C:\Users\<USER-NAME>\AppData\Local\Microsoft\OneDrive\Settings  
+```
+To convert the URL path returned by ThisWorkbook.Path to a local path using this function, use the following.  
+```
+Dim localPath As String
+localPath = GetLocalPath(ThisWorkbook.Path)
+```  
+  
+### Methods other than GetLocalPath function 
+Three different methods are proposed here. All methods are for replacing "ThisWorkbook.Path" and do not convert URL paths to local paths in a generic way like the GetLocalPath function.       
 (Part 1)  Use "Show Recently Opened Items"  
 (Part 2)  Use "Open Explorer"  
 (Part 3)  Use "System.Windows.Forms.SendKeys"  
-(Part 4)  Use GetLocalPath function  
   
 The source code for (1) through (3) is available in this repository. The files exported from the standard modules are posted as they are, so please import them or copy and paste the necessary parts.  
 (Part 1)  Module1.bas  
 (Part 2)  Module2.bas  
 (Part 3)  Module3.bas  
   
-The source code of the GetLocalPath function in (4) can be found in the following repository.  
-   [GetLocalPath](https://github.com/Excel-VBA-Diary/GetLocalPath)  
-  
-## Proposed Solution (Part 1)   
+#### \(1) Use "View Recently Opened Items".     
   
 The source code is Module1.bas. The function to get the local path is GetThisWorkbookLocalPath1().  
 
@@ -47,7 +66,7 @@ For Windows 10, "Show recently opened items in Jump Lists on Start or the taskba
 
 If this setting is off, the link is as described above. If this setting is off, GetThisWorkbookLocalPath1() returns an empty string (zero-length string) because the linked file (LNK file) described above is not recorded.  
   
-### How to know if "Show Recently Opened Items" is enabled or disabled    
+#### How to know if "Show Recently Opened Items" is enabled or disabled    
   
 Before calling GetThisWorkbookLocalPath1(), you can check by reading the registry key to know if "Show Recently Opened Items" is turned on. The function for this is Is_Start_TrackDocs().  
   
@@ -55,7 +74,7 @@ This function reads the value of Start_TrackDocs in the registry key shown below
 
     HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\  
 
-## Proposed Solution (Part 2)   
+#### \(2)  Use "Open Explorer"    
   
 The source code is Module2.bas. The function to get the local path is GetThisWorkbookLocalPath2().  
 
@@ -71,7 +90,7 @@ Since GetThisWorkbookLocalPath2() obtains information from the explorer in this 
 
 Note that if the files are placed directly under OneDrive or OneDrive for Business (root folder), ThisWorkbook.Path returns a specific URL pattern for each, so even without obtaining information from Explorer, OneDrive will return Environ("OneDrive") for OneDrive and Environ("OneDriveCommercial") for OneDrive for Business to correspond to the local path.  
 
-## Proposed Solution (Part 3)   
+#### \(3)  Use "System.Windows.Forms.SendKeys"     
   
 The source code is Module3.bas. The function to get the local path is GetThisWorkbookLocalPath3().  
 
@@ -94,19 +113,6 @@ The timing for sending keystrokes is specified by the Start-Sleep cmdlet in the 
 Please note that it is normal for the window to change when keystrokes are sent. If the keystroke submission fails, GetThisWorkbookLocalPath3() returns an empty string (zero-length string).  
 
 If the original source code makes heavy use of ThisWorkbook.Path, simply replacing ThisWorkbook.Path with GetThisWorkbookLocalPath3() will result in frequent screen movement, so it is recommended to use a global variable such as It is recommended to minimize the number of calls to GetThisWorkbookLocalPath3() as much as possible.  
-
-## Proposed Solution (Part 4)    
-  
-The solution uses the OneDrive mount information in the Windows registry. This mount information is located under the following subkeys:  
-```
-\HKEY_CURRENT_USER\Software\SyncEngines\Providers\OneDrive
-```
-A description and source code for the GetLocalPath function can be found [here](https://github.com/Excel-VBA-Diary/GetLocalPath).   
-To convert the URL path returned by ThisWorkbook.Path to a local path using this function, use the following: 
-```
-Dim localPath As String
-localPath = GetLocalPath(ThisWorkbook.Path)
-```  
 
 ## Afterword 
 
